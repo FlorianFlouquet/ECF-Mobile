@@ -7,6 +7,8 @@ Ceci est une simple application mobile pour l'entreprise Localib
 
 - IDE 
 - Ionic (React)
+- node
+- Android Studio (pour la mise en production)
 
 ## Installation
 
