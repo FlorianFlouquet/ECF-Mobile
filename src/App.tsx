@@ -1,7 +1,7 @@
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
+import { IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import { home, car } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -21,20 +21,47 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { VehiculesListPage } from './pages/VehiculesList.page';
+import { VehiculesDetailPage } from './pages/VehiculesDetailPage';
+import { LocatairesListPage } from './pages/LocatairesListPage';
+import { LocataireDetailPage } from './pages/LocataireDetailPage';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-      </IonRouterOutlet>
+      <IonTabs>
+        <IonRouterOutlet>
+          <Route exact path="/vehicules/:id">
+            <VehiculesDetailPage />
+          </Route>
+          <Route exact path="/vehicules">
+            <VehiculesListPage />
+          </Route>
+          <Route exact path="/locataires">
+            <LocatairesListPage />
+          </Route>
+          <Route exact path="/locataires/:id">
+            <LocataireDetailPage />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/vehicules" />
+          </Route>
+        </IonRouterOutlet>
+
+        <IonTabBar slot='bottom'>
+          <IonTabButton tab='vehicules' href='/vehicules'>
+            <IonIcon icon={car} />
+            <IonLabel>Vehicules</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab='locataires' href='/locataires'>
+            <IonIcon icon={home} />
+            <IonLabel>Locataires</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
+      </IonTabs>
+      
     </IonReactRouter>
   </IonApp>
 );
